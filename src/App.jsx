@@ -1,6 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Menu,X} from "lucide-react";
+
 import {
   FaPinterest,
   FaGoogle,
@@ -79,6 +80,7 @@ function StatCard({ icon, number, text, delay }) {
 
 export default function MarketingWebsite() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Handle navbar scroll effect
   useEffect(() => {
@@ -115,7 +117,7 @@ export default function MarketingWebsite() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="container mx-auto px-20 flex items-center justify-between">
+        <div className="px-4 md:px-20 flex items-center justify-between">
           <motion.div
             className="flex items-center"
             initial={{ opacity: 0 }}
@@ -127,6 +129,17 @@ export default function MarketingWebsite() {
             </div>
             <span className="ml-2 font-bold text-white text-xl">Nexus</span>
           </motion.div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden ">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-300 hover:text-white"
+            >
+              {mobileMenuOpen ? <X /> : <Menu />}
+            </button>
+          </div>
+
           <div className="hidden md:flex items-center space-x-8">
             {["Home", "About", "Services", "Portfolio", "Pricing"].map(
               (item, index) => (
@@ -155,7 +168,7 @@ export default function MarketingWebsite() {
               Login
             </motion.a>
             <motion.button
-              className="bg-gradient-to-r from-indigo-600 to-blue-500 hover:from-indigo-500 hover:to-blue-400 text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-lg shadow-indigo-500/20"
+              className="bg-gradient-to-r from-indigo-600 to-blue-500 hover:from-indigo-500 hover:to-blue-400 text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-lg shadow-indigo-500/20 hidden md:block"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 0.9 }}
@@ -168,8 +181,47 @@ export default function MarketingWebsite() {
         </div>
       </motion.nav>
 
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <motion.div
+          className="fixed inset-0 z-40 bg-[#0F172A]/95 backdrop-blur-sm md:hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <div className="flex flex-col items-center justify-center h-full space-y-8">
+            {["Home", "About", "Services", "Portfolio", "Pricing"].map(
+              (item, index) => (
+                <motion.a
+                  key={item}
+                  href="#"
+                  className="text-gray-300 hover:text-indigo-400 transition-colors text-xl"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 + index * 0.1 }}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item}
+                </motion.a>
+              )
+            )}
+            <motion.button
+              className="bg-gradient-to-r from-indigo-600 to-blue-500 hover:from-indigo-500 hover:to-blue-400 text-white px-8 py-3 rounded-lg font-medium transition-all shadow-lg shadow-indigo-500/20 mt-4"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Get Started
+            </motion.button>
+          </div>
+        </motion.div>
+      )}
+
       {/* Hero Section */}
-      <section className="container mx-auto px-20 py-16 md:py-24 relative">
+      <section className="container mx-auto px-4 md:px-20 py-16 md:py-24 relative">
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 to-transparent rounded-3xl max-w-6xl mx-auto"
           aria-hidden="true"
@@ -194,7 +246,7 @@ export default function MarketingWebsite() {
               Digital Marketing Agency
             </motion.div>
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
+              className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -354,7 +406,7 @@ export default function MarketingWebsite() {
       </section>
 
       {/* Services Section */}
-      <section className="container mx-auto px-20 py-20">
+      <section className="container mx-auto px-4 md:px-20 py-20">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <motion.div
             className="inline-block px-3 py-1 rounded-full bg-indigo-900/50 text-indigo-300 text-sm font-medium mb-4"
@@ -386,7 +438,7 @@ export default function MarketingWebsite() {
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {[
             {
               icon: MdOutlineSearch,
@@ -425,7 +477,7 @@ export default function MarketingWebsite() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="bg-gradient-to-b from-[#0F172A] to-[#0F1A2A] px-11 py-20">
+      <section className="bg-gradient-to-b from-[#0F172A] to-[#0F1A2A] px-4 md:px-11 py-20">
         <div className="container mx-auto px-4">
           <motion.div
             className="flex items-center gap-4 mb-16"
@@ -622,7 +674,7 @@ export default function MarketingWebsite() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="container mx-auto px-4 py-20 overflow-hidden">
+      <section className="container mx-auto px-4 py-11 md:py-20 overflow-hidden">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <motion.div
             className="inline-block px-3 py-1 rounded-full bg-indigo-900/50 text-indigo-300 text-sm font-medium mb-4"
@@ -757,7 +809,7 @@ export default function MarketingWebsite() {
 
       {/* Contact Section */}
       {/* CTA Section */}
-      <section className="container mx-auto px-20 py-20">
+      <section className="container mx-auto px-4 md:px-20 py-11 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -790,9 +842,9 @@ export default function MarketingWebsite() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0A1022] pt-16 px-20 pb-8">
+      <footer className="bg-[#0A1022] pt-16 px-4 md:px-20 pb-8">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             {/* Brand Info */}
             <div>
               <div className="flex items-center mb-6">
