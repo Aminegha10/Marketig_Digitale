@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Menu,X} from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import {
   FaPinterest,
@@ -117,7 +117,7 @@ export default function MarketingWebsite() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="px-4 md:px-20 flex items-center justify-between">
+        <div className="px-4 md:px-20 flex items-center justify-between w-full">
           <motion.div
             className="flex items-center"
             initial={{ opacity: 0 }}
@@ -130,11 +130,11 @@ export default function MarketingWebsite() {
             <span className="ml-2 font-bold text-white text-xl">Nexus</span>
           </motion.div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden ">
+          {/* Mobile menu button - moved to the far right */}
+          <div className="md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-300 hover:text-white"
+              className="text-gray-300 hover:text-white ml-auto"
             >
               {mobileMenuOpen ? <X /> : <Menu />}
             </button>
@@ -157,10 +157,10 @@ export default function MarketingWebsite() {
               )
             )}
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4">
             <motion.a
               href="#"
-              className="text-gray-300 hover:text-indigo-400 transition-colors hidden md:block"
+              className="text-gray-300 hover:text-indigo-400 transition-colors"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.8 }}
@@ -168,7 +168,7 @@ export default function MarketingWebsite() {
               Login
             </motion.a>
             <motion.button
-              className="bg-gradient-to-r from-indigo-600 to-blue-500 hover:from-indigo-500 hover:to-blue-400 text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-lg shadow-indigo-500/20 hidden md:block"
+              className="bg-gradient-to-r from-indigo-600 to-blue-500 hover:from-indigo-500 hover:to-blue-400 text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-lg shadow-indigo-500/20"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 0.9 }}
